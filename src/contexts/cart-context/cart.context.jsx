@@ -6,5 +6,8 @@ export const CartContext = createContext({
   cartItems: [],
   addItemToCart: () => {},
   cartQuantity: 0,
-  setCartQuantity: () => {}
+  setCartQuantity: () => {},
+  removeItemFromCart: () => {},
+  clearItemFromCartList: () => {},
+  totalCost: () => {}
 });
