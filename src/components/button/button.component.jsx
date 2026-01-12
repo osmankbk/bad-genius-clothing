@@ -1,5 +1,5 @@
 import { BaseButton, GoogleSignButton, InvertedButton } from "./button.styles";
-import { BUTTON_TYPE_CLASSES } from "./button-type-class";
+import { BUTTON_TYPE_CLASSES } from "../../utils/components/button.component";
 
 const BUTTON_TYPE_MAP = {
   [BUTTON_TYPE_CLASSES.base]: BaseButton,

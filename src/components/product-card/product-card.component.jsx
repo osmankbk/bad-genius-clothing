@@ -5,7 +5,7 @@ import { CartContext } from '../../contexts/cart-context/cart.context';
 import './product-card.styles.scss';
 
 import Button from '../button/button.component';
-import { BUTTON_TYPE_CLASSES } from '../button/button-type-class';
+import { BUTTON_TYPE_CLASSES } from '../../utils/components/button.component';
 
 const ProductCard = ({ product }) => {
   const { addItemToCart } = useContext(CartContext)

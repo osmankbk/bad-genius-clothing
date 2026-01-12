@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../button/button-type-class";
+import { BUTTON_TYPE_CLASSES } from "../../utils/components/button.component";
 
 
 import { signInWithGooglePopUp, signAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
