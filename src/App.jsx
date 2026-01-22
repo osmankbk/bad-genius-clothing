@@ -20,7 +20,15 @@ const App = () => {
         if (user) {
           createUserDocumentFromAuth(user);
         }
-        dispatch(setCurrentUser(user));
+        const userPayload = user
+    ? {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      }
+    : null;
+        dispatch(setCurrentUser(userPayload));
       })
   
       return unsubscribe;
