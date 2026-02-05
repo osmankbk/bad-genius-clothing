@@ -67,13 +67,18 @@ export const getCategoriesAndDocuments = async (collectionKey) => {
   return querySnapshot.docs.map((docSnapShot) => docSnapShot.data());
 }
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, 'users', userAuth.uid);
-  
-  const userSnapshot = await getDoc(userDocRef);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
+  // get snapshot
+  let userSnapshot = await getDoc(userDocRef);
+
+  // if doc doesn't exist, create it then re-fetch snapshot
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -83,14 +88,17 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
         displayName,
         email,
         createdAt,
-        ...additionalInformation
+        ...additionalInformation,
       });
-    } catch(error) {
-      console.log('error creating the user', error.message);
-    }
 
-    return userDocRef;
+      userSnapshot = await getDoc(userDocRef); 
+    } catch (error) {
+      console.log("error creating the user", error.message);
+      return; // bail if create failed
+    }
   }
+
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -106,3 +114,16 @@ export const signAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (authUser) => {
+        unsubscribe();
+        resolve(authUser);
+      },
+      reject
+    );
+  });
+};

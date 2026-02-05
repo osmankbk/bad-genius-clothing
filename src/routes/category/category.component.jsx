@@ -14,7 +14,6 @@ const Category = () => {
   const { category } = useParams();
   const categories = useSelector(categoriesSelector);
   const isLoading = useSelector(categoryIsLoadingSelector);
-  console.log(isLoading);
   const [ products, setProducts ] = useState(categories[category]);
 
   useEffect(() => {
