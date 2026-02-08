@@ -1,6 +1,11 @@
+// src/contexts/cart.provider.jsx (DEPRECATED)
 import { useReducer } from "react";
 import { CartContext } from "./cart.context";
 import { createAction } from "../../utils/reducer/reducer.utils";
+/**
+ * @deprecated Migrated to Redux + Saga.
+ * Do not use this context for app state.
+ */
 
 const INITIAL_STATE = {
   isCartOpen: false,
