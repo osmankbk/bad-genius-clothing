@@ -6,6 +6,8 @@ export const setCartItems = (cartItems) => createAction(CART_ACTIONS_TYPES.SET_C
 
 export const setIsCartOpen = (bool) => createAction(CART_ACTIONS_TYPES.SET_IS_CART_OPEN, bool);
 
+export const clearCart = () => createAction(CART_ACTIONS_TYPES.SET_EMPTY_CART)
+
 const addCartItem = (cartItems, productToAdd) => {
   const itemInCart = cartItems.find((item) => item.id === productToAdd.id);
 
