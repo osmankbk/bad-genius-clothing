@@ -23,7 +23,8 @@ export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
     case CART_ACTIONS_TYPES.SET_EMPTY_CART:
       return {
         state,
-        cartItems: []
+        cartItems: [],
+        isCartOpen: false
       }
     default:
       return state;

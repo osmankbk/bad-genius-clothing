@@ -7,10 +7,10 @@ import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import { totalCartCost, selectIsCartOpen } from "../../store/cart/cart.selector";
+import { totalCartCost } from "../../store/cart/cart.selector";
 import { userSelector } from "../../store/user/user.selector";
 
-import { clearCart, setIsCartOpen } from "../../store/cart/cart.action";
+import { clearCart } from "../../store/cart/cart.action";
 
 import { BUTTON_TYPE_CLASSES } from "../../utils/components/button.component";
 
@@ -22,7 +22,6 @@ const PaymentForm = () => {
 
   const user = useSelector(userSelector);
   const amount = useSelector(totalCartCost);
-  const isCartOpen = useSelector(selectIsCartOpen);
 
   const dispatch = useDispatch();
   
@@ -74,10 +73,9 @@ const PaymentForm = () => {
 
     if (paymentResult.paymentIntent.status === 'succeeded') {
       dispatch(clearCart());
-      dispatch(setIsCartOpen(!isCartOpen))
       alert('Payment Successful');
     }
-    
+
     navigateToShopPage();
 
     } catch(error) {
