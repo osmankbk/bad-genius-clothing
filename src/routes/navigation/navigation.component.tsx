@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { signOutStart } from "../../store/user/user.action";
 
-import CrwnLogo from '../../assets/crown.svg?react';
+import CrwnLogo from '../../assets/crown.svg';
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -14,7 +14,7 @@ import { userSelector } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 
-import {NavigationContainer, NavLinks, NavLink, LogoContainer} from './navigation.styles';
+import { NavigationContainer, NavLinks, NavLink, LogoContainer, NavLinkSpan } from "./navigation.styles";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -26,22 +26,17 @@ const Navigation = () => {
     <>
       <NavigationContainer>
         <LogoContainer to='/' >
-          <CrwnLogo className="logo" />
+          <img src={CrwnLogo} className="logo" />
         </LogoContainer>
         <NavLinks>
           <NavLink to='/shop'>
             SHOP
           </NavLink>
-          {
-            currentUser ? (
-              <NavLink as='span' onClick={signOutUser}>SIGN OUT</NavLink>
-            ) :
-            (
-            <NavLink to='/auth'>
-              SIGN IN
-            </NavLink>
-            )
-          }
+          {currentUser ? (
+            <NavLinkSpan onClick={signOutUser}>SIGN OUT</NavLinkSpan>
+          ) : (
+            <NavLink to="/auth">SIGN IN</NavLink>
+          )}
           <CartIcon />
         </NavLinks>
         {
