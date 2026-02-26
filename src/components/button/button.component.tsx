@@ -1,5 +1,8 @@
-import { BaseButton, GoogleSignButton, InvertedButton, ButtonSpinner } from "./button.styles";
+import { FC, ButtonHTMLAttributes } from "react";
+
 import { BUTTON_TYPE_CLASSES } from "../../utils/components/button.component";
+
+import { BaseButton, GoogleSignButton, InvertedButton, ButtonSpinner } from "./button.styles";
 
 const BUTTON_TYPE_MAP = {
   [BUTTON_TYPE_CLASSES.base]: BaseButton,
@@ -7,7 +10,12 @@ const BUTTON_TYPE_MAP = {
   [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
 };
 
-const Button = ({ children, buttonType = BUTTON_TYPE_CLASSES.base, isLoading, ...otherProps }) => {
+type ButtonProps = {
+  buttonType?: BUTTON_TYPE_CLASSES;
+  isLoading?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: FC<ButtonProps> = ({ children, buttonType = BUTTON_TYPE_CLASSES.base, isLoading, ...otherProps }) => {
 
   const CustomButton = BUTTON_TYPE_MAP[buttonType] || BaseButton
 
