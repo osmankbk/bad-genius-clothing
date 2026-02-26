@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, FormHTMLAttributes, SubmitEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CardElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+import { StripeCardElement } from "@stripe/stripe-js";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -30,7 +31,9 @@ const PaymentForm = () => {
 
   const navigateToShopPage = () => navigate('/shop');
 
-  const paymentHandler = async (e) => {
+  const isValideCardElement = (card: StripeCardElement | null) : card is StripeCardElement => card !== null;
+
+  const paymentHandler = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if(!stripe || !elements) return;
@@ -49,7 +52,7 @@ const PaymentForm = () => {
     const { clientSecret } = response;
     const cardElement = elements.getElement(CardElement);
 
-    if (!cardElement) {
+    if (!isValideCardElement(cardElement)) {
       setIsProcessingPayment(false);
       alert("Card input not ready yet. Please try again.");
       return;

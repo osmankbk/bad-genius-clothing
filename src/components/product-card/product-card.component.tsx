@@ -8,7 +8,9 @@ import './product-card.styles.scss';
 import Button from '../button/button.component';
 import { BUTTON_TYPE_CLASSES } from '../../utils/components/button.component';
 
-const ProductCard = ({ product }) => {
+import type { CategoryItem } from '@/store/categories/category.types';
+
+const ProductCard = ({ product }: { product: CategoryItem }) => {
   const cartItems = useSelector(cartItemSelector);
   const dispatch = useDispatch();
  
